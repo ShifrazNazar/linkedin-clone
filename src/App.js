@@ -13,9 +13,9 @@ function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
-  useEffect(()=>{
+  useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
-      if (userAuth){
+      if (userAuth) {
         dispatch(
           login({
             email: userAuth.email,
@@ -23,12 +23,12 @@ function App() {
             displayName: userAuth.displayName,
             photoUrl: userAuth.photoURL,
           })
-        )
+        );
       } else {
-        dispatch(logout())
+        dispatch(logout());
       }
-    })
-  },[])
+    });
+  }, []);
 
   return (
     <div className="app">

@@ -5,7 +5,7 @@ import { selectUser } from "./features/userSlice";
 import "./Sidebar.css";
 
 function Sidebar() {
-  const user = useSelector(selectUser)
+  const user = useSelector(selectUser);
 
   const recentItem = (topic) => {
     return (
@@ -23,7 +23,7 @@ function Sidebar() {
           src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
           alt=""
         />
-        <Avatar src={user.photoUrl} className="sidebar__avatar" >
+        <Avatar src={user.photoUrl} className="sidebar__avatar">
           {user.displayName[0]}
         </Avatar>
         <h2>{user.displayName}</h2>
