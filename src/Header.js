@@ -7,20 +7,28 @@ import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import WorkIcon from "@mui/icons-material/Work";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useDispatch } from "react-redux";
+import { auth } from "./firebase";
+import { logout } from "./features/userSlice";
 
 function Header() {
+  const dispatch = useDispatch();
+  const logoutOfApp = () => {
+    dispatch(logout());
+    auth.signOut();
+  };
+
   return (
     <div className="header">
       <div className="header__left">
         <img
           src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"
-          alt=""
+          alt="Linkedin"
         />
         <div className="header__search">
           <SearchIcon />
 
-          <input type="text" />
+          <input type="text" placeholder="Search" />
         </div>
       </div>
 
@@ -30,7 +38,7 @@ function Header() {
         <HeaderOptions Icon={WorkIcon} title="Jobs" />
         <HeaderOptions Icon={ChatIcon} title="Messaging" />
         <HeaderOptions Icon={NotificationsIcon} title="Notifications" />
-        <HeaderOptions avatar={AccountCircleIcon} title="me" />
+        <HeaderOptions avatar={true} title="me" onClick={logoutOfApp} />
       </div>
     </div>
   );
