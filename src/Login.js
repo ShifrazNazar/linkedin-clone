@@ -10,7 +10,10 @@ function Login() {
   const [name, setName] = useState("");
   const [profilePic, setProfilePic] = useState("");
   const dispatch = useDispatch();
-
+  
+  // loginToApp
+  
+  // This method is called when the user clicks the "Sign In" button. It uses Firebase's signInWithEmailAndPassword method to authenticate the user with their email and password. If the authentication is successful, the login action is dispatched with the user's email, uid, display name, and profile URL. If the authentication fails, an error message is displayed.
   const loginToApp = (e) => {
     e.preventDefault();
     auth
@@ -26,10 +29,14 @@ function Login() {
         );
       })
       .catch((error) => alert(error));
-  };
-
-  const register = () => {
-    if (!name) {
+    };
+    
+    // register
+    
+    // This method is called when the user clicks the "Register Now" button. It first checks that the user has entered a full name, as it is required for registration. It then uses Firebase's createUserWithEmailAndPassword method to create a new user with the given email and password. Once the user is created, their display name and profile picture URL are updated using updateProfile, and the login action is dispatched with the user's email, uid, display name, and profile URL. If any of these steps fail, an error message is displayed.
+    // The component uses useDispatch from the react-redux library to dispatch the login action with the user's credentials.
+    const register = () => {
+      if (!name) {
       return alert("Please enter a full name");
     }
     auth
@@ -105,3 +112,5 @@ function Login() {
 }
 
 export default Login;
+
+

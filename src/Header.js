@@ -13,6 +13,8 @@ import { logout } from "./features/userSlice";
 
 function Header() {
   const dispatch = useDispatch();
+
+  // onClick arrow function to logout of app
   const logoutOfApp = () => {
     dispatch(logout());
     auth.signOut();
