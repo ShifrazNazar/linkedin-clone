@@ -5,10 +5,10 @@ import { useDispatch } from "react-redux";
 import { login } from "./features/userSlice";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [profilePic, setProfilePic] = useState("");
+  const [email, setEmail] = useState("demo@gmail.com");
+  const [password, setPassword] = useState("demo@123");
+  const [name, setName] = useState("Demo Guy");
+  const [profilePic, setProfilePic] = useState("https://i.pinimg.com/474x/bd/18/cb/bd18cb31dc17600e58570dbf53ce38da.jpg");
   const dispatch = useDispatch();
   
   // loginToApp
@@ -76,7 +76,7 @@ function Login() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           type="text"
-          placeholder="Full name (required if registering)"
+          placeholder="Username"
         />
         <input
           value={profilePic}
@@ -88,13 +88,13 @@ function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
-          placeholder="Email"
+          placeholder="Demo@gmail.com"
         />
         <input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           type="password"
-          placeholder="Password"
+          placeholder="demo@123"
         />
         <button type="submit" onClick={loginToApp}>
           Sign In
