@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Login.css";
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
@@ -15,7 +15,7 @@ function Login() {
     name: Yup.string().required("Please enter a full name"),
     email: Yup.string().email("Invalid email address").required("Email is required"),
     password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
-    profilePic: Yup.string().url("Invalid URL format"),
+    photoUrl: Yup.string().url("Invalid URL format"),
   });
 
   const formik = useFormik({
@@ -23,7 +23,7 @@ function Login() {
       name: "Demo Guy",
       email: "demo@gmail.com",
       password: "demo@123",
-      profilePic: "https://i.pinimg.com/474x/bd/18/cb/bd18cb31dc17600e58570dbf53ce38da.jpg",
+      photoUrl: "https://i.pinimg.com/474x/bd/18/cb/bd18cb31dc17600e58570dbf53ce38da.jpg",
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -34,7 +34,7 @@ function Login() {
             email: userAuth.user.email,
             uid: userAuth.user.uid,
             displayName: userAuth.user.displayName,
-            profileUrl: userAuth.user.photoURL,
+            photoUrl: userAuth.user.photoUrl,
           })
         );
       } catch (error) {
@@ -45,15 +45,11 @@ function Login() {
 
   const register = async () => {
     try {
-      if (!formik.values.name) {
-        throw new Error("Please enter a full name");
-      }
-
       const userAuth = await auth.createUserWithEmailAndPassword(formik.values.email, formik.values.password);
 
       await userAuth.user.updateProfile({
         displayName: formik.values.name,
-        photoURL: formik.values.profilePic,
+        photoUrl: formik.values.photoUrl,
       });
 
       dispatch(
@@ -61,7 +57,7 @@ function Login() {
           email: userAuth.user.email,
           uid: userAuth.user.uid,
           displayName: formik.values.name,
-          profileUrl: formik.values.profilePic,
+          photoUrl: formik.values.photoUrl,
         })
       );
 
@@ -91,14 +87,14 @@ function Login() {
         ) : null}
 
         <input
-          value={formik.values.profilePic}
+          value={formik.values.photoUrl}
           onChange={formik.handleChange}
           type="text"
           placeholder="Profile pic URL (optional)"
           name="profilePic"
         />
-        {formik.touched.profilePic && formik.errors.profilePic ? (
-          <div className="error">{formik.errors.profilePic}</div>
+        {formik.touched.photoUrl && formik.errors.photoUrl ? (
+          <div className="error">{formik.errors.photoUrl}</div>
         ) : null}
 
         <input

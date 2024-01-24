@@ -32,7 +32,7 @@ function App() {
         dispatch(logout());
       }
     });
-  }, []);
+  }, [dispatch]);
 
   // The return statement renders either the Login component if the user is not logged in, or the Sidebar, Feed, and Widgets components if the user is logged in. The Header component is rendered in both cases.
   return (
